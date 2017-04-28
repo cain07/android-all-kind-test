@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="test.cain.yjw.MainActivity">
+   >
 
 
     <TextView
@@ -22,14 +22,14 @@
         android:textSize="20sp"/>
 
     <Button
-        android:text="xml写入"
+        android:text="打电话"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:id="@+id/button1"
          />
     <Button
-        android:text="Button"
+        android:text="打电话2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

@@ -10,17 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="test.cain.yjw.MainActivity">
+    >
 
-    <!-- 通过包的类的全名来引用自定义视图-->
-    <!--<test.cain.yjw.Header
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#000000"
-        app:titleText="我是标题"
-        app:titleTextColor="#ff0000"
-        app:titleTextSize="12sp"/>-->
 
     <TextView
         android:id="@+id/tv_dd"

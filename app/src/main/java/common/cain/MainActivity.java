@@ -14,16 +14,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //LinearLayout ll_add = (LinearLayout) findViewById(R.id.ll_add);
-        /*((Header) findViewById(R.id.header)).setOnHeaderClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "标题栏的按钮被点击了", Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-        //Header header = new Header(this);
-        //ll_add.addView(header);
         Button button1 = (Button) findViewById(R.id.button1);
         Button button2 = (Button) findViewById(R.id.button2);
         Button button3 = (Button) findViewById(R.id.button3);
@@ -53,6 +43,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.button3:
+                intent = new Intent();
+                intent.setClass(MainActivity.this,ActivityTwo.class);
+                startActivity(intent);
                 break;
             case R.id.button4:
                 break;
