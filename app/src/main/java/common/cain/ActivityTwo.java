@@ -2,11 +2,15 @@ package common.cain;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import common.cain.utils.RequestCode;
 
 public class ActivityTwo extends Activity implements View.OnClickListener {
 
@@ -42,36 +46,13 @@ public class ActivityTwo extends Activity implements View.OnClickListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_TEST:
-                if (grantResults.length > 0) {
-                    return;
-                }
-
-                if (!CheckPermissionUtils.isNeedAddPermission(this, Manifest.permission.READ_PHONE_STATE)) {
-                    // do something
-                    Toast.makeText(this, "申请权限成功:" + Manifest.permission.READ_PHONE_STATE, Toast.LENGTH_LONG).show();
-                }
-                if (!CheckPermissionUtils.isNeedAddPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    // do something
-                    Toast.makeText(this, "申请权限成功:" + Manifest.permission.WRITE_EXTERNAL_STORAGE, Toast.LENGTH_LONG).show();
-                }
-
-                break;
-
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
                 requestPermissiontest();
                 break;
             case R.id.button2:
+                doCallPhone();
                 break;
             case R.id.button3:
                 break;
@@ -80,5 +61,38 @@ public class ActivityTwo extends Activity implements View.OnClickListener {
             case R.id.button5:
                 break;
         }
+    }
+
+    /**
+     * 拨打电话
+     */
+    private void doCallPhone() {
+        XPermissionUtils.requestPermissions(this, RequestCode.PHONE, new String[] {
+                Manifest.permission.CALL_PHONE
+        }, new XPermissionUtils.OnPermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:10010"));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onPermissionDenied(String[] deniedPermissions, boolean alwaysDenied) {
+                Toast.makeText(ActivityTwo.this, "获取拨打电话权限失败", Toast.LENGTH_SHORT).show();
+                if (alwaysDenied) {
+                    //DialogUtil.showPermissionManagerDialog(ActivityTwo.this, "拨打电话");
+                    Toast.makeText(ActivityTwo.this, "拨打电话", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        XPermissionUtils.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
